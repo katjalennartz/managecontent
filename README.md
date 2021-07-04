@@ -7,7 +7,9 @@ Ihr könnt bestimmen, ob der Inhaltstyp Scrollbar ist und welche max. Höhe er h
 # Kontakt
 von Risuena  
 Download: https://github.com/katjalennartz/managecontent/
+
 LICENSE: GNU General Public License v3.0  
+
 # How to
 Inhalt des upload Ordners hochladen
 Plugin Installieren.
