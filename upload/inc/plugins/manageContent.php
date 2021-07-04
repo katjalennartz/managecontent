@@ -168,10 +168,11 @@ function manageContent_global()
 			$scrollable = "style=\"max-height:{$get_types['mc_scrollheight']}px; overflow:auto\"";
 		}
 		// wir bauen die äußere div box
+		if ($get_types['mc_active'] == 1){
 		${'mc_' . $get_types['mc_type']} = "
 		<div class=\"mc_box_{$typename}\" " . $scrollable . ">
 			{$mc_content}
 		</div>
-		";
+		";}
 	}
 }
