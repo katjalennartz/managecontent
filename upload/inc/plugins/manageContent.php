@@ -87,6 +87,7 @@ function manageContent_activate()
 
 function manageContent_deactivate()
 {
+	change_admin_permission("config", "manageContent", -1); 
 }
 
 
