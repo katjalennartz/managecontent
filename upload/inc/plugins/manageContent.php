@@ -50,6 +50,7 @@ function manageContent_install()
     `mc_id` int(20) NOT NULL AUTO_INCREMENT,
     `mc_type` varchar(200) NOT NULL,
     `mc_scrollable` TINYINT(1) NOT NULL DEFAULT 0,
+		`mc_active` TINYINT(1) NOT NULL DEFAULT 1,
 		`mc_scrollheight` int(10),
 PRIMARY KEY (`mc_id`)
 ) ENGINE=MyISAM CHARACTER SET utf8 COLLATE utf8_general_ci;");
@@ -59,7 +60,7 @@ PRIMARY KEY (`mc_id`)
 		$db->write_query("CREATE TABLE `" . TABLE_PREFIX . "mc_content` (
     `mc_cid` int(20) NOT NULL AUTO_INCREMENT,
     `mc_type` varchar(200) NOT NULL,
-    `mc_content` TINYINT(1) NOT NULL DEFAULT 0,
+    `mc_content` varchar(5000) NOT NULL,
     `mc_sort` int(10),
     `mc_date` datetime NOT NULL,
 		`mc_showdate` TINYINT(1) NOT NULL DEFAULT 0,
