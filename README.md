@@ -18,6 +18,7 @@ Als erstes müsst ihr einen Inhaltstypen anlegen.
 Zum Beispiel: news
 
 Als nächstes erstellt ihr einen Inhalt und wählt den entsprechenden Inhaltstypen aus.
+Im Textfeld könnt ihr sowohl html, als auch mybb code verwenden.
 
 In der Übersicht findet ihr die Variable, die ihr jetzt zum Beispiel im Header einbauen könnt. <3 
 Fertig.
