@@ -22,4 +22,8 @@ Im Textfeld könnt ihr sowohl html, als auch mybb code verwenden.
 In der Übersicht findet ihr die Variable, die ihr jetzt zum Beispiel im Header einbauen könnt. <3 
 Fertig.
 
+
+*Wenn euch der Menüpunkt im ACP nicht angezeigt wird, überprüft bitte dir Administrator-Berechtigungen.
+(bordadresse/admin/index.php?module=user-admin_permissions ) und schaut ob "Darf globale Inhalte anlegen und verwalten?" auf Ja steht :)*
+
 Weitere Einstellungen im ACP sind nicht nötig. 
