@@ -9,7 +9,7 @@ von Risuena
 Kontakt: https://lslv.de/risu  
 Download: https://github.com/katjalennartz/socialnetwork_2.0  
 LICENSE: GNU General Public License v3.0  
-#How to
+# How to
 Inhalt des upload Ordners hochladen
 Plugin Installieren.
 
