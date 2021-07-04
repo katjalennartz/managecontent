@@ -172,7 +172,7 @@ function manageContent_global()
 		// wir bauen die äußere div box
 		if ($get_types['mc_active'] == 1){
 		${'mc_' . $get_types['mc_type']} = "
-		<div class=\"mc_box_{$typename}\" " . $scrollable . ">
+		<div class=\"mc_box_".$get_types['mc_type']."\" " . $scrollable . ">
 			{$mc_content}
 		</div>
 		";}
