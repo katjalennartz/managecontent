@@ -23,7 +23,7 @@ In der Übersicht findet ihr die Variable, die ihr jetzt zum Beispiel im Header 
 Fertig.
 
 
-*Wenn euch der Menüpunkt im ACP nicht angezeigt wird, überprüft bitte dir Administrator-Berechtigungen.
-(bordadresse/admin/index.php?module=user-admin_permissions ) und schaut ob "Darf globale Inhalte anlegen und verwalten?" auf Ja steht :)*
+**Wenn euch der Menüpunkt im ACP nicht angezeigt wird, überprüft bitte die Administrator-Berechtigungen.
+(bordadresse/admin/index.php?module=user-admin_permissions ) und schaut ob "Darf globale Inhalte anlegen und verwalten?" auf Ja steht :)**
 
 Weitere Einstellungen im ACP sind nicht nötig. 
