@@ -6,8 +6,7 @@ Ihr könnt bestimmen, ob der Inhaltstyp Scrollbar ist und welche max. Höhe er h
 
 # Kontakt
 von Risuena  
-Kontakt: https://lslv.de/risu  
-Download: https://github.com/katjalennartz/socialnetwork_2.0  
+Download: https://github.com/katjalennartz/managecontent/
 LICENSE: GNU General Public License v3.0  
 # How to
 Inhalt des upload Ordners hochladen
