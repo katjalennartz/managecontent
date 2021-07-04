@@ -82,6 +82,7 @@ function manageContent_uninstall()
 
 function manageContent_activate()
 {
+	change_admin_permission("config", "manageContent", 1);
 }
 
 function manageContent_deactivate()
