@@ -130,7 +130,7 @@ if ($mybb->input['action'] == "do_addType") { //hier speichern wir neue Inhaltst
 
   //Auswahlbox für Inhaltstyp erstellen
   //Query um aus der DB die schon erstellten Typen zu bekommen.
-  $query = $db->write_query("SELECT * FROM `mybb_mc_types`");
+  $query = $db->write_query("SELECT * FROM `".TABLE_PREFIX."mc_types`");
   $options = array();
   //Wenn es welche gibt: 
   if (mysqli_num_rows($query) > 0) {
@@ -248,7 +248,7 @@ if ($mybb->input['action'] == "do_addType") { //hier speichern wir neue Inhaltst
     $form = new Form("index.php?module=" . MODULE . "&amp;action=do_edit", "post");
     $form_container = new FormContainer($lang->manageContent_editContent);
 
-    $query = $db->write_query("SELECT * FROM `mybb_mc_types`");
+    $query = $db->write_query("SELECT * FROM `".TABLE_PREFIX."mc_types`");
     $options = array();
     //Wenn es welche gibt: 
     if (mysqli_num_rows($query) > 0) {
