@@ -28,12 +28,22 @@ if ($mybb->input['action'] == "do_addType") { //hier speichern wir neue Inhaltst
     flash_message($lang->manageContent_scrollable_not, 'error');
     admin_redirect("index.php?module=" . MODULE . "&action=addType");
   }
+  if (!strlen(trim($mybb->input['guest']))) {
+    flash_message($lang->manageContent_guest_not, 'error');
+    admin_redirect("index.php?module=" . MODULE . "&action=addType");
+  }
+  if (!strlen(trim($mybb->input['guest_only']))) {
+    flash_message($lang->manageContent_guest_only_not, 'error');
+    admin_redirect("index.php?module=" . MODULE . "&action=addType");
+  }
   //Array zum speichern erstellen
   $insert = array(
     "mc_active" => $mybb->input['active'],
     "mc_type" => $db->escape_string($mybb->input['typname']),
     "mc_scrollable" => $mybb->input['scrollable'],
     "mc_scrollheight" => $mybb->input['scrollheight'],
+    "mc_guest" => $mybb->input['guest'],
+    "mc_guest_only" => $mybb->input['guest_only'],
   );
 
   $db->insert_query("mc_types", $insert);
@@ -111,6 +121,16 @@ if ($mybb->input['action'] == "do_addType") { //hier speichern wir neue Inhaltst
   $form_container->output_row($lang->manageContent_scrollable . " <em>*</em>", '', $add_scrollable);
   $form_container->output_row($lang->manageContent_scrollheight, $lang->manageContent_add_order_desc, $form->generate_numeric_field('scrollheight', $content['scrollheight'], array('id' => 'scrollheight', 'min' => 0)), 'scrollheight');
 
+  //Gastansicht
+  $gid = "guest";
+  $add_guest = $form->generate_yes_no_radio("guest", 1, true, array("id" => $gid . "_yes", "class" => $gid), array("id" => $gid . "_no", "class" => $gid));
+  $form_container->output_row($lang->manageContent_guest . " <em>*</em>", '', $add_guest);
+
+    //Gastansicht
+    $goid = "guest_only";
+    $add_guest_only = $form->generate_yes_no_radio("guest_only", 0, true, array("id" => $goid . "_yes", "class" => $goid), array("id" => $goid . "_no", "class" => $goid));
+    $form_container->output_row($lang->manageContent_guest_only . " <em>*</em>", '', $add_guest_only);
+  
   $form_container->end();
 
   $buttons[] = $form->generate_submit_button($lang->manageContent_submit);
@@ -172,14 +192,14 @@ if ($mybb->input['action'] == "do_addType") { //hier speichern wir neue Inhaltst
     flash_message($lang->manageContent_delete_success, 'success');
     admin_redirect("index.php?module=" . MODULE);
     //typ und content löschen
-  } 
+  }
   if ($mybb->input['c_id']) {
     //content löschen
 
     $db->delete_query("mc_content", "mc_cid='{$mybb->input['c_id']}'");
-     flash_message($lang->manageContent_delete_success, 'success');
-     admin_redirect("index.php?module=" . MODULE);
-  } 
+    flash_message($lang->manageContent_delete_success, 'success');
+    admin_redirect("index.php?module=" . MODULE);
+  }
   /* Show mask for edit an manageContent */
 } elseif ($mybb->input['action'] == "edit") {
 
@@ -219,6 +239,14 @@ if ($mybb->input['action'] == "do_addType") { //hier speichern wir neue Inhaltst
     $form_container->output_row($lang->manageContent_scrollable . " <em>*</em>", '', $add_scrollable);
 
     $form_container->output_row($lang->manageContent_scrollheight, $lang->manageContent_add_order_desc, $form->generate_numeric_field('scrollheight', $content['scrollheight'], array('id' => 'scrollheight', 'min' => 0)), 'scrollheight');
+
+    $gid = "guest";
+    $add_guest = $form->generate_yes_no_radio("guest", $type['mc_guest'], true, array("id" => $gid . "_yes", "class" => $gid), array("id" => $gid . "_no", "class" => $gid));
+    $form_container->output_row($lang->manageContent_guest . " <em>*</em>", '', $add_guest);
+
+    $gid = "guest_only";
+    $add_guest_only = $form->generate_yes_no_radio("guest_only", $type['mc_guest_only'], true, array("id" => $goid . "_yes", "class" => $goid), array("id" => $goid . "_no", "class" => $goid));
+    $form_container->output_row($lang->manageContent_guest_only . " <em>*</em>", '', $add_guest_only);
 
     echo $form->generate_hidden_field("mc_id", $mc_id);
 
@@ -301,12 +329,22 @@ if ($mybb->input['action'] == "do_addType") { //hier speichern wir neue Inhaltst
     flash_message($lang->manageContent_scrollable_not, 'error');
     admin_redirect("index.php?module=" . MODULE . "&action=addType");
   }
+  if (!strlen(trim($mybb->input['guest']))) {
+    flash_message($lang->manageContent_guest_not, 'error');
+    admin_redirect("index.php?module=" . MODULE . "&action=addType");
+  }
+  if (!strlen(trim($mybb->input['guest_only']))) {
+    flash_message($lang->manageContent_guest_only_not, 'error');
+    admin_redirect("index.php?module=" . MODULE . "&action=addType");
+  }
   //Array zum speichern erstellen
   $update = array(
     "mc_active" => $mybb->input['active'],
     "mc_type" => $db->escape_string($mybb->input['typname']),
     "mc_scrollable" => $mybb->input['scrollable'],
     "mc_scrollheight" => $mybb->input['scrollheight'],
+    "mc_guest" => $mybb->input['guest'],
+    "mc_guest_only" => $mybb->input['guest_only'],
   );
   $db->update_query("mc_types", $update, "mc_id='{$mc_id}'");
   flash_message($lang->manageContent_addType_success, 'success');
