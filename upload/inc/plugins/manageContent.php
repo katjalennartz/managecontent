@@ -49,10 +49,12 @@ function manageContent_install()
 		$db->write_query("CREATE TABLE `" . TABLE_PREFIX . "mc_types` (
     `mc_id` int(20) NOT NULL AUTO_INCREMENT,
     `mc_type` varchar(200) NOT NULL,
-    `mc_scrollable` TINYINT(1) NOT NULL DEFAULT 0,
-		`mc_active` TINYINT(1) NOT NULL DEFAULT 1,
+    `mc_scrollable` int(1) NOT NULL DEFAULT 0,
+		`mc_active` int(1) NOT NULL DEFAULT 1,
 		`mc_scrollheight` int(10),
-PRIMARY KEY (`mc_id`)
+		`mc_guest` int(1),
+		`mc_guest_only` int(1),
+		PRIMARY KEY (`mc_id`)
 ) ENGINE=MyISAM CHARACTER SET utf8 COLLATE utf8_general_ci;");
 	}
 	//Table vor manageContent Content
@@ -143,6 +145,8 @@ function manageContent_global()
 	$mc_types = $db->simple_select("mc_types", "*");
 
 	while ($get_types = $db->fetch_array($mc_types)) {
+		$thisuser = $mybb->user['uid'];
+
 		//typ
 		$typname = $get_types['mc_type'];
 		//dynamische globale variable, damit der Inhalt auch angezeigt wird.
@@ -152,6 +156,14 @@ function manageContent_global()
 		$mc_content_query = $db->simple_select("mc_content", "*", "mc_type = '{$get_types['mc_type']}'");
 		while ($get_content = $db->fetch_array($mc_content_query)) {
 			$content = $parser->parse_message($get_content['mc_content'], $options);
+			if ($get_types['mc_type']== "Sisterboards") {
+				$content = $get_content['mc_content'];
+			}
+
+			if ($get_types['mc_type']== "welcome_user") {
+				$content = $get_content['mc_content'];
+			}
+
 			if ($get_content['mc_showdate'] == 1) {
 				$content_date = "<div class=\"{$typname}_date\">" . date('d.m.y', strtotime($get_content['mc_date'])) . "</div>";
 			}
@@ -176,5 +188,11 @@ function manageContent_global()
 			{$mc_content}
 		</div>
 		";}
+		if ($thisuser == 0 && $get_types['mc_guest'] == 0 ) {
+			${'mc_' . $get_types['mc_type']} = "";
+		}  
+		if ($thisuser != 0 && $get_types['mc_guest_only'] == 1 ) {
+			${'mc_' . $get_types['mc_type']} = "";
+		}  
 	}
 }
