@@ -51,9 +51,9 @@ function manageContent_install()
     `mc_type` varchar(200) NOT NULL,
     `mc_scrollable` int(1) NOT NULL DEFAULT 0,
 		`mc_active` int(1) NOT NULL DEFAULT 1,
-		`mc_scrollheight` int(10),
-		`mc_guest` int(1),
-		`mc_guest_only` int(1),
+		`mc_scrollheight` int(10) NOT NULL,
+		`mc_guest` int(1) NOT NULL DEFAULT 1,
+		`mc_guest_only` int(1) NOT NULL DEFAULT 0,
 		PRIMARY KEY (`mc_id`)
 ) ENGINE=MyISAM CHARACTER SET utf8 COLLATE utf8_general_ci;");
 	}
