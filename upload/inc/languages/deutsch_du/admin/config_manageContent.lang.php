@@ -44,6 +44,12 @@ $l['manageContent_typname_not'] = "Bitte gib dem Inhaltstyp einen Namen. Zum Bei
 $l['manageContent_scrollable'] = "Sollen die Inhalte in einer Scrollbaren Box zusammengefasst werden (z.b. Newsbox)?";
 $l['manageContent_scrollable_not'] = "Internal Error [1]";
 
+$l['manageContent_guest'] = "Dürfen Gäste diesen Inhaltstypen sehen?";
+$l['manageContent_guest_not'] = "Internal Error [1]";
+
+$l['manageContent_guest_only'] = "Dürfen <i>nur</i> Gäste diesen Inhaltstypen sehen?";
+$l['manageContent_guest_only_not'] = "Internal Error [1]";
+
 $l['manageContent_scrollheight'] = "Wenn scrollbar, wie hoch darf die box höchstens sein?";
 
 $l['manageContent_addType_success'] = "Inhaltstyp wurde gespeichert";
