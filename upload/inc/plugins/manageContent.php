@@ -166,6 +166,8 @@ function manageContent_global()
 
 			if ($get_content['mc_showdate'] == 1) {
 				$content_date = "<div class=\"{$typname}_date\">" . date('d.m.y', strtotime($get_content['mc_date'])) . "</div>";
+			} else {
+				$content_date ="";
 			}
 			//wir bauen den inhalt (innere div box)
 			$mc_content .= "
