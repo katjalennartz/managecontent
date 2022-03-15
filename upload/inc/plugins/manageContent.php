@@ -153,7 +153,7 @@ function manageContent_global()
 		global ${'mc_' . $get_types['mc_type']};
 		//alle dazugehörigen einträge
 		$mc_content = "";
-		$mc_content_query = $db->simple_select("mc_content", "*", "mc_type = '{$get_types['mc_type']}'");
+		$mc_content_query = $db->simple_select("mc_content", "*", "mc_type = '{$get_types['mc_type']}'", array("order_by" => 'mc_sort'));
 		while ($get_content = $db->fetch_array($mc_content_query)) {
 			$content = $parser->parse_message($get_content['mc_content'], $options);
 			if ($get_types['mc_type']== "Sisterboards") {
@@ -182,6 +182,8 @@ function manageContent_global()
 				$get_types['mc_scrollheight'] = "200";
 			}
 			$scrollable = "style=\"max-height:{$get_types['mc_scrollheight']}px; overflow:auto\"";
+		} else {
+			$scrollable ="";
 		}
 		// wir bauen die äußere div box
 		if ($get_types['mc_active'] == 1){
