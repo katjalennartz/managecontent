@@ -119,18 +119,21 @@ if ($mybb->input['action'] == "do_addType") { //hier speichern wir neue Inhaltst
   $sid = "scrollable";
   $add_scrollable = $form->generate_yes_no_radio("scrollable", 1, true, array("id" => $sid . "_yes", "class" => $sid), array("id" => $sid . "_no", "class" => $sid));
   $form_container->output_row($lang->manageContent_scrollable . " <em>*</em>", '', $add_scrollable);
-  $form_container->output_row($lang->manageContent_scrollheight, $lang->manageContent_add_order_desc, $form->generate_numeric_field('scrollheight', $content['scrollheight'], array('id' => 'scrollheight', 'min' => 0)), 'scrollheight');
+  if (!isset($content['scrollheight'])) {
+    $content['scrollheight'] = '0';
+  }
+  $form_container->output_row($lang->manageContent_scrollheight, "", $form->generate_numeric_field('scrollheight', $content['scrollheight'], array('id' => 'scrollheight', 'min' => 0)), 'scrollheight');
 
   //Gastansicht
   $gid = "guest";
   $add_guest = $form->generate_yes_no_radio("guest", 1, true, array("id" => $gid . "_yes", "class" => $gid), array("id" => $gid . "_no", "class" => $gid));
   $form_container->output_row($lang->manageContent_guest . " <em>*</em>", '', $add_guest);
 
-    //Gastansicht
-    $goid = "guest_only";
-    $add_guest_only = $form->generate_yes_no_radio("guest_only", 0, true, array("id" => $goid . "_yes", "class" => $goid), array("id" => $goid . "_no", "class" => $goid));
-    $form_container->output_row($lang->manageContent_guest_only . " <em>*</em>", '', $add_guest_only);
-  
+  //Gastansicht
+  $goid = "guest_only";
+  $add_guest_only = $form->generate_yes_no_radio("guest_only", 0, true, array("id" => $goid . "_yes", "class" => $goid), array("id" => $goid . "_no", "class" => $goid));
+  $form_container->output_row($lang->manageContent_guest_only . " <em>*</em>", '', $add_guest_only);
+
   $form_container->end();
 
   $buttons[] = $form->generate_submit_button($lang->manageContent_submit);
@@ -150,7 +153,7 @@ if ($mybb->input['action'] == "do_addType") { //hier speichern wir neue Inhaltst
 
   //Auswahlbox für Inhaltstyp erstellen
   //Query um aus der DB die schon erstellten Typen zu bekommen.
-  $query = $db->write_query("SELECT * FROM `".TABLE_PREFIX."mc_types`");
+  $query = $db->write_query("SELECT * FROM `" . TABLE_PREFIX . "mc_types`");
   $options = array();
   //Wenn es welche gibt: 
   if (mysqli_num_rows($query) > 0) {
@@ -204,7 +207,7 @@ if ($mybb->input['action'] == "do_addType") { //hier speichern wir neue Inhaltst
 } elseif ($mybb->input['action'] == "edit") {
 
   //Typ editieren
-  if ($mybb->input['typeid']) {
+  if (isset($mybb->input['typeid'])) {
     $query = $db->simple_select("mc_types", "*", "mc_id = '" . $mybb->get_input('typeid', MyBB::INPUT_INT) . "'");
 
     if ($db->num_rows($query) != 1) {
@@ -269,14 +272,14 @@ if ($mybb->input['action'] == "do_addType") { //hier speichern wir neue Inhaltst
     $mc_cid = $mybb->get_input('cid', MyBB::INPUT_INT);
 
     //Erstellen der Formcontainer für edit Content
-    $page->add_breadcrumb_item($lang->manageContent_editContent, "index.php?module=" . MODULE . "&amp;action=edit&amp;cid=$mc_id");
+    $page->add_breadcrumb_item($lang->manageContent_editContent, "index.php?module=" . MODULE . "&amp;action=edit&amp;cid=$mc_cid");
     $page->output_header($lang->manageContent_editContent);
     generate_tabs("list");
 
     $form = new Form("index.php?module=" . MODULE . "&amp;action=do_edit", "post");
     $form_container = new FormContainer($lang->manageContent_editContent);
 
-    $query = $db->write_query("SELECT * FROM `".TABLE_PREFIX."mc_types`");
+    $query = $db->write_query("SELECT * FROM `" . TABLE_PREFIX . "mc_types`");
     $options = array();
     //Wenn es welche gibt: 
     if (mysqli_num_rows($query) > 0) {
