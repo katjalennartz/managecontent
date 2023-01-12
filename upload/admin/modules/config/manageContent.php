@@ -164,7 +164,11 @@ if ($mybb->input['action'] == "do_addType") { //hier speichern wir neue Inhaltst
   } else {
     echo "<h1 style=\"color:red;\"><b>Bitte erst einen Inhaltstypen erstellen</b></h1>";
   }
-
+  if (isset($mybb->input['disporder'])) {
+    $mybb->input['disporder'] =  $mybb->input['disporder'];
+  } else {
+    $mybb->input['disporder'] = 0;
+  }
   $form_container->output_row($lang->manageContent_add_order . " <em>*</em>", $lang->manageContent_add_order_desc, $form->generate_numeric_field('disporder', $mybb->input['disporder'], array('id' => 'disporder', 'min' => 0)), 'disporder');
 
   //textarea erstellen
