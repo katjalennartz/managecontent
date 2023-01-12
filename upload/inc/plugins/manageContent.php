@@ -160,7 +160,14 @@ function manageContent_global()
 		$mc_content_query = $db->simple_select("mc_content", "*", "mc_type = '{$get_types['mc_type']}'", array("order_by" => 'mc_sort'));
 		while ($get_content = $db->fetch_array($mc_content_query)) {
 			$content = $parser->parse_message($get_content['mc_content'], $options);
-			
+			// if ($get_types['mc_type'] == "Sisterboards") {
+			// 	$content = $get_content['mc_content'];
+			// }
+
+			// if ($get_types['mc_type'] == "welcome_user") {
+			// 	$content = $get_content['mc_content'];
+			// }
+
 			if ($get_content['mc_showdate'] == 1) {
 				$content_date = "<div class=\"{$typname}_date\">" . date('d.m.y', strtotime($get_content['mc_date'])) . "</div>";
 			} else {
