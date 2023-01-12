@@ -469,7 +469,7 @@ if ($mybb->input['action'] == "do_addType") { //hier speichern wir neue Inhaltst
           {$mc_date}</small>", array('class' => 'align_center', "width" => '10%'));
 
 
-          if ($contenttype['mc_showdate']) {
+          if (isset($contenttype['mc_showdate'])) {
             $table->construct_cell($lang->yes, array('class' => 'align_center', 'width' => '5%'));
           } else {
             $table->construct_cell($lang->no, array('class' => 'align_center', 'width' => '5%'));
