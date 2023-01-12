@@ -6,9 +6,10 @@ if (!isset($pluginlist)) {
 	$pluginlist = $cache->read("plugins");
 }
 
-$plugins->add_hook("build_forumbits_forum", "manageContent_global");
-$plugins->add_hook("global_intermediate", "manageContent_global");
+//uncomment this if you want to add the variables in the forum bit
+// $plugins->add_hook("build_forumbits_forum", "manageContent_global");
 
+$plugins->add_hook("global_intermediate", "manageContent_global");
 
 $plugins->add_hook("admin_config_menu", "manageContent_admin_config_menu");
 $plugins->add_hook("admin_config_action_handler", "manageContent_admin_config_action_handler");
@@ -52,12 +53,12 @@ function manageContent_install()
 		$db->write_query("CREATE TABLE `" . TABLE_PREFIX . "mc_types` (
     `mc_id` int(20) NOT NULL AUTO_INCREMENT,
     `mc_type` varchar(200) NOT NULL,
-    `mc_scrollable` TINYINT(1) NOT NULL DEFAULT 0,
-		`mc_active` TINYINT(1) NOT NULL DEFAULT 1,
-		`mc_scrollheight` int(10),
-		`mc_guest` TINYINT(1),
-		`mc_guest_only` TINYINT(1),
-PRIMARY KEY (`mc_id`)
+    `mc_scrollable` int(1) NOT NULL DEFAULT 0,
+		`mc_active` int(1) NOT NULL DEFAULT 1,
+		`mc_scrollheight` int(10) NOT NULL,
+		`mc_guest` int(1) NOT NULL DEFAULT 1,
+		`mc_guest_only` int(1) NOT NULL DEFAULT 0,
+		PRIMARY KEY (`mc_id`)
 ) ENGINE=MyISAM CHARACTER SET utf8 COLLATE utf8_general_ci;");
 	}
 	//Table vor manageContent Content
@@ -128,7 +129,7 @@ function manageContent_admin_config_permissions($admin_permissions)
 	return $admin_permissions;
 }
 
-function manageContent_global(&$forum)
+function manageContent_global()
 {
 	global $manageContent, $mybb, $db;
 	//parser
@@ -159,14 +160,7 @@ function manageContent_global(&$forum)
 		$mc_content_query = $db->simple_select("mc_content", "*", "mc_type = '{$get_types['mc_type']}'", array("order_by" => 'mc_sort'));
 		while ($get_content = $db->fetch_array($mc_content_query)) {
 			$content = $parser->parse_message($get_content['mc_content'], $options);
-			if ($get_types['mc_type'] == "Sisterboards") {
-				$content = $get_content['mc_content'];
-			}
-
-			if ($get_types['mc_type'] == "welcome_user") {
-				$content = $get_content['mc_content'];
-			}
-
+			
 			if ($get_content['mc_showdate'] == 1) {
 				$content_date = "<div class=\"{$typname}_date\">" . date('d.m.y', strtotime($get_content['mc_date'])) . "</div>";
 			} else {
@@ -195,39 +189,12 @@ function manageContent_global(&$forum)
 			{$mc_content}
 		</div>
 		";
-			// if (!empty($forum)) {
-			// 	if ($forum['fid'] == "3" && $get_types['mc_type'] == "news") {
-			// 		$forum[$get_types['mc_type']] = ${'mc_' . $get_types['mc_type']};
-			// 	}
-
-			// 	if ($forum['fid'] == "7" && $get_types['mc_type'] == "ingame") {
-			// 		$forum[$get_types['mc_type']] = ${'mc_' . $get_types['mc_type']};
-			// 	}
-			// }
 		}
-
-
 		if ($thisuser == 0 && $get_types['mc_guest'] == 0) {
-			// ${'mc_' . $get_types['mc_type']} = "";
-			// if ($forum['fid'] == "3" && $get_types['mc_type'] == "news") {
-			// 	$forum[$get_types['mc_type']] = ${'mc_' . $get_types['mc_type']};
-			// }
-			// if (!empty($forum)) {
-			// 	if ($forum['fid'] == "37" && $get_types['mc_type'] == "ingame") {
-			// 		$forum[$get_types['mc_type']] = ${'mc_' . $get_types['mc_type']};
-			// 	}
-			// }
+			${'mc_' . $get_types['mc_type']} = "";
 		}
 		if ($thisuser != 0 && $get_types['mc_guest_only'] == 1) {
 			${'mc_' . $get_types['mc_type']} = "";
-			// if ($forum['fid'] == "3" && $get_types['mc_type'] == "news") {
-			// 	$forum[$get_types['mc_type']] = ${'mc_' . $get_types['mc_type']};
-			// }
-			// if (!empty($forum)) {
-			// 	if ($forum['fid'] == "7" && $get_types['mc_type'] == "ingame") {
-			// 		$forum[$get_types['mc_type']] = ${'mc_' . $get_types['mc_type']};
-			// 	}
-			// }
 		}
 	}
 }
