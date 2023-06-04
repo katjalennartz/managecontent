@@ -286,7 +286,7 @@ if ($mybb->input['action'] == "do_addType") { //hier speichern wir neue Inhaltst
     $query = $db->write_query("SELECT * FROM `" . TABLE_PREFIX . "mc_types`");
     $options = array();
     //Wenn es welche gibt: 
-    if (mysqli_num_rows($query) > 0) {
+    if ($db->num_rows($query) > 0) {
       while ($output = $db->fetch_array($query)) {
         $options[$output['mc_type']] = $output['mc_type'];
       }
